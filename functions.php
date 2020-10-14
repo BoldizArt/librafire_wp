@@ -1,5 +1,30 @@
 <?php
 /**
+ * Enqueue styles
+ */
+function librafireEnqueueStyles() {
+    $parent = 'parent-style'; 
+    $theme = wp_get_theme();
+    wp_enqueue_style($parent, get_template_directory_uri() . '/style.css', 
+        [], 
+        $theme->parent()->get('Version')
+    );
+    wp_enqueue_style('child-style', get_stylesheet_uri(),
+        [$parent],
+        $theme->get('Version')
+	);
+
+	// Add Bootstrap to the theme
+	wp_enqueue_style('bootstrapcdn', 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css' );
+
+	// Add custom style
+	wp_enqueue_style('librafire', get_stylesheet_directory_uri() . '/css/custom.css', false, '1.1', 'all');
+}
+
+// Hook into the 'wp_enqueue_scripts' action
+add_action('wp_enqueue_scripts', 'librafireEnqueueStyles');
+
+/**
  * Create one custom post type: employee
  */
 function librafireRegisterPostType()
@@ -43,6 +68,8 @@ function librafireRegisterPostType()
 	// Register this post type
 	register_post_type('employee', $args);
 }
+
+// Hook into the 'init' action
 add_action('init', 'librafireRegisterPostType');
 
 
@@ -91,7 +118,7 @@ function librafireInsertTerms()
 	// Define an array with terms
 	$terms = [
 		'developer' => __('Developer', 'librafire'),
-		'designer,' => __('Designer', 'librafire'),
+		'designer' => __('Designer', 'librafire'),
 		'qa' => __('QA', 'librafire')
 	];
 

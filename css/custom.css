@@ -1,0 +1,34 @@
+.employee-container .custom-fields .label {
+  font-size: 1.4rem;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #ccc; }
+
+.employee-container .custom-fields .text {
+  margin-bottom: 1rem;
+  padding-bottom: 1rem; }
+
+.employee-container .content {
+  margin-top: 2.4rem; }
+
+.sidebar .widget-area .widget-title {
+  font-size: 1.4rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid #ccc; }
+
+.sidebar .widget-area ul {
+  padding: 0;
+  margin: 0; }
+  .sidebar .widget-area ul li {
+    list-style: none;
+    margin-left: 1rem; }
+    .sidebar .widget-area ul li a {
+      color: #8d8d8d; }
+      .sidebar .widget-area ul li a:hover {
+        color: #2d2d2d;
+        text-decoration: none; }
+
+.comments-area {
+  padding-top: 1rem;
+  border-top: 1px solid #ccc;
+  margin-top: 2.4rem; }
