@@ -50,7 +50,7 @@ add_action('init', 'librafireRegisterPostType');
 function librafireCustomTaxonomy() {
 	// Define the labels
 	$labels = [
-		'name' => __('roles', 'taxonomy general name'),
+		'name' => __('Roles', 'taxonomy general name'),
 		'singular_name' => __('Role', 'taxonomy singular name'),
 		'search_items' =>  __('Search roles'),
 		'all_items' => __('All roles'),
@@ -84,3 +84,32 @@ function librafireCustomTaxonomy() {
 
 // Hook into the 'init' action
 add_action('init', 'librafireCustomTaxonomy', 0);
+
+// Create terms
+function librafireInsertTerms()
+{
+	// Define an array with terms
+	$terms = [
+		'developer' => __('Developer', 'librafire'),
+		'designer,' => __('Designer', 'librafire'),
+		'qa' => __('QA', 'librafire')
+	];
+
+	foreach ($terms as $slug => $term) {
+		// Check if the term is exists
+		if (!term_exists($term, 'role')) {
+			wp_insert_term(
+				$term,
+				'role', // The taxonomy
+				[
+					'description' => "The employee is a {$term}",
+					'slug' => $slug,
+				]
+			);
+		}
+	}
+}
+
+// Hook into the 'init' action
+add_action('init', 'librafireInsertTerms', 0);
+
