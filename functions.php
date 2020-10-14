@@ -44,3 +44,43 @@ function librafireRegisterPostType()
 	register_post_type('employee', $args);
 }
 add_action('init', 'librafireRegisterPostType');
+
+
+// Add new taxonomy and make it hierarchical like categories
+function librafireCustomTaxonomy() {
+	// Define the labels
+	$labels = [
+		'name' => __('roles', 'taxonomy general name'),
+		'singular_name' => __('Role', 'taxonomy singular name'),
+		'search_items' =>  __('Search roles'),
+		'all_items' => __('All roles'),
+		'parent_item' => __('Parent role'),
+		'parent_item_colon' => __('Parent role:'),
+		'edit_item' => __('Edit role'), 
+		'update_item' => __('Update role'),
+		'add_new_item' => __('Add new role'),
+		'new_item_name' => __('New role name'),
+		'menu_name' => __('Roles'),
+	];    
+ 
+	// Register the taxonomy
+	register_taxonomy('role', 
+		[
+			'employee'
+		], 
+		[
+			'hierarchical' => true,
+			'labels' => $labels,
+			'show_ui' => true,
+			'show_in_rest' => true,
+			'show_admin_column' => true,
+			'query_var' => true,
+			'rewrite' => [
+				'slug' => 'role'
+			],
+		]
+	);
+}
+
+// Hook into the 'init' action
+add_action('init', 'librafireCustomTaxonomy', 0);
